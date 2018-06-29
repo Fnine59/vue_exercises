@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<title>Mixin</title>
+</head>
+<body>
+<div id="app">
+	<popup></popup>
+	<tooltip></tooltip>
+</div>
+<template id="article">
+	<div>
+		<button @click="show">弹出</button>
+		<div v-show="visible">
+			<p @click="hide">x</p>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</div>
+	</div>
+</template>
+<template id="tooltip">
+	<div>
+		<div @mouseenter="show" @mouseleave="hide">bys</div>
+		<div v-show="visible">白岩松</div>
+	</div>
+</template>
+</body>
+<script type="text/javascript">
+	var base = {
+		methods: {
+			show(){
+				this.visible = true;
+			},
+			hide(){
+				this.visible = false;
+			}
+		},
+		data(){
+			return {
+				visible: false,
+			}
+		}
+	};
+	Vue.component('popup', {
+		template: '#article',
+		mixins: [base],
+	});
+	Vue.component('tooltip', {
+		template: '#tooltip',
+		mixins: [base],
+		data(){
+			return {
+				visible: true
+			}
+		}
+	});
+	new Vue({
+		el: '#app',
+	});
+</script>
+</html>

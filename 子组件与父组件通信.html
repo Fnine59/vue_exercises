@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<title>子组件与父组件通信</title>
+</head>
+<body>
+<div id="app">
+	<balance></balance>
+</div>
+<template id="balance_component">
+	<div>
+		<show @show_balance="show_balance"></show>
+		<div v-if="show">您的余额是：￥99999999元</div>
+	</div>
+</template>
+</body>
+<script type="text/javascript">
+	Vue.component('balance',{
+		template: '#balance_component',
+		data: function (){
+			return {
+				show: false,
+			}
+		},
+		methods:{
+			show_balance: function(data){
+				this.show = true;
+				console.log('data', data);
+			}
+		}
+	});
+	Vue.component('show',{
+		template: '<button @click="on_click">显示余额</button>',
+		methods: {
+			on_click: function(){
+				this.$emit('show_balance', {'a':1, 'b':2});
+			}
+		}
+	});
+	new Vue({
+		el: '#app',
+	});
+</script>
+</html>

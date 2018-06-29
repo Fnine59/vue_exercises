@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<title>任意组件及平行组件之间通信</title>
+</head>
+<body>
+<div id="app">
+	<speak></speak>
+	<hear></hear>
+</div>
+</body>
+<script type="text/javascript">
+	var Event = new Vue();
+	Vue.component('speak',{
+		template: `
+			<div>
+				I say: <input type="text" @keyup="onchange" v-model="said"> {{said}}
+			</div>
+		`,
+		methods:{
+			onchange: function (){
+				Event.$emit('people_said',this.said);
+			}
+		},
+		data: function(){
+			return {
+				said: '',
+			}
+		}
+	});
+	Vue.component('hear',{
+		template:'<div>听到别人说：{{heared}}</div>',
+		data: function(){
+			return {
+				heared: '',
+			}
+		},
+		mounted: function (){
+			var that = this;
+			Event.$on('people_said',function (data){
+				that.heared = data;
+			})
+		}
+	});
+	new Vue({
+		el: '#app'
+	});
+</script>
+</html>

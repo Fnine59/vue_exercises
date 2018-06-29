@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<title>全局组件</title>
+</head>
+<body>
+<div id="app">
+	<alert msg="test!"></alert>
+	<hr>
+	根据用户名动态修改链接：
+	<user username="whh"></user>
+</div>
+<template id="user_component">
+	<a :href="'user/' + username">{{username}}</a>
+</template>
+</body>
+<script type="text/javascript">
+	Vue.component('alert', {
+		template: '<button @click="on_click">测试</button>',
+		props: ['msg'],
+		methods: {
+			on_click: function (){
+				alert(this.msg);
+			}
+		}
+	});
+	Vue.component('user', {
+		template: '#user_component',
+		props: ['username'],
+		methods: {
+		}
+	});
+	new Vue({
+		el: '#app'
+	});
+</script>
+</html>

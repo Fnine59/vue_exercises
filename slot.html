@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<title>slot</title>
+	<style type="text/css">
+		.panel{
+			max-width: 300px;
+			border: 1px solid #999;
+			margin: 10px;
+		}
+		.panel > * {
+			padding: 15px;
+		}
+		.panel .title{
+			border-bottom: 1px solid #999;
+		}
+		.panel .footer{
+			border-top: 1px solid #999;
+		}
+	</style>
+</head>
+<body>
+<div id="app">
+	<panel>
+		<div slot="title">卡片1</div>
+		<div slot="content">卡片内容1</div>
+		<div slot="footer">不使用slot默认值的footer</div>
+	</panel>
+	<panel>
+		<div slot="title">test title</div>
+		<div slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+	</panel>
+</div>
+<template id="panel_component">
+	<div class="panel">
+		<div class="title"><slot name="title"></slot></div>
+		<div class="content">
+			<slot name="content"></slot>
+		</div>
+		<div class="footer">
+			<slot name="footer">更多信息</slot>
+		</div>
+	</div>
+</template>
+</body>
+<script type="text/javascript">
+	Vue.component('panel',{
+		template: '#panel_component',
+	});
+	new Vue({
+		el: '#app'
+	});
+</script>
+</html>
