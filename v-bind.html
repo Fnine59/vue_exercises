@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<title>v-bind属性</title>
+	<style type="text/css">
+		.active {
+			background: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<a :class="klass" :href="url">
+			<img :src="img">
+		</a>
+		<a :class="{active: isActive}" :href="url">点我</a>
+	</div>
+</body>
+<script type="text/javascript">
+	var app = new Vue({
+		el: '#app',
+		data: {
+			url: 'https://www.baidu.com',
+			img: 'https://dummyimage.com/100x100/ffcc00/ffffff',
+			klass: 'btn-default',
+			isActive: true
+		}
+	});
+</script>
+</html>

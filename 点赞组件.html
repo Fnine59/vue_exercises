@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<title>点赞组件</title>
+	<style type="text/css">
+		.liked{
+			background: deeppink;
+		}
+	</style>
+</head>
+<body>
+<div id="app">
+	<like></like>
+</div>
+<template id="like_component">
+	<button :class="{liked: liked}" @click="on_click">赞 {{like_count}}</button>
+</template>
+</body>
+<script type="text/javascript">
+	Vue.component('like',{
+		template: '#like_component',
+		data: function(){
+			return {
+				like_count: 10,
+				liked: false,
+			}
+		},
+		methods: {
+			on_click: function(){
+				if(!this.liked){
+					this.like_count++;
+				}
+				else{
+					this.like_count--;
+				}
+				this.liked = !this.liked;
+			}
+		}
+	});
+	new Vue({
+		el: '#app'
+	});
+</script>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<title>局部组件</title>
+</head>
+<body>
+	<div id="seg1">
+		<alert></alert>
+	</div>
+	<div id="seg2">
+		<alert></alert>
+	</div>
+</body>
+<script type="text/javascript">
+	var seg2_component = {
+		template: '<button @click="on_click">测试2</button>',
+		methods: {
+			on_click: function (){
+				alert('测试2成功');
+			}
+		}
+	};
+	new Vue({
+		el: '#seg1',
+		components: {
+			'alert': {
+				template: '<button @click="on_click">测试</button>',
+				methods: {
+					on_click: function (){
+						alert('测试成功');
+					}
+				}
+			}
+		}
+	});
+	new Vue({
+		el: '#seg2',
+		components: {
+			alert: seg2_component
+		}
+	});
+</script>
+</html>

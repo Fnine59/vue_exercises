@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<title>全局组件</title>
+</head>
+<body>
+<div id="app">
+	<alert></alert>
+	<alert></alert>
+	<alert></alert>
+	<alert></alert>
+	<alert></alert>
+	<alert></alert>
+	<alert></alert>
+</div>
+</body>
+<script type="text/javascript">
+	Vue.component('alert', {
+		template: '<button @click="on_click">测试</button>',
+		methods: {
+			on_click: function (){
+				alert('测试成功');
+			}
+		}
+	});
+	new Vue({
+		el: '#app'
+	});
+</script>
+</html>
